@@ -1,0 +1,229 @@
+Private Function defcomodcal(ByVal co As Double, ByVal unit As Double, ByVal power As Double, ByVal lev As Double) As Double
+'CO defense modifier calculator
+Dim a As Double
+a = 0
+Select Case co
+Case 0
+a = 0
+Case 1
+Call defmod0112(a)
+Case 2
+If power = 0 Then
+Call defmod0102(a)
+Else
+Call defmod0104(a)
+End If
+Case 3
+Call defmod0104(a)
+Case 4
+If power = 0 Then
+Call defmod0204(unit, a)
+Else
+Call defmod0260(unit, a)
+End If
+Case 5
+If power = 0 Then
+a = 0
+Else
+Call defmod0104(a)
+End If
+Case 6
+If power = 0 Then
+a = 0
+Else
+Call defmod0106(a)
+End If
+Case 7
+Call defmod0304(lev, a)
+Case 8
+Call defmod0112(a)
+Case 9
+Call defmod0106(a)
+Case 10
+Call defmod0106(a)
+Case 11
+Call defmod0102(a)
+Call defmod0402(unit, a)
+Case 12
+Call defmod0112(a)
+Case 13
+If power = 0 Then
+Call defmod0102(a)
+Call defmod0506(unit, a)
+Else
+Call defmod0102(a)
+Call defmod0560(unit, a)
+End If
+Case 14
+Call defmod0102(a)
+Case 15
+Call defmod0102(a)
+Case 16
+a = 0
+Case 17
+If power = 0 Then
+Call defmod0102(a)
+Call defmod0614(unit, a)
+Else
+Call defmod0102(a)
+Call defmod06a1(unit, a)
+End If
+Case 18
+Call defmod0102(a)
+Case 19
+If power = 0 Then
+Call defmod0102(a)
+Else
+Call defmod01a1(a)
+End If
+Case 20
+If power = 0 Then
+Call defmod0102(a)
+Call defmod0714(unit, a)
+Else
+Call defmod0102(a)
+Call defmod0718(unit, a)
+End If
+Case 21
+Call defmod0102(a)
+Call defmod0804(unit, a)
+Case 22
+Call defmod0104(a)
+Case 23
+Call defmod0102(a)
+Call defmod0908(unit, a)
+Case 24
+Call defmod0102(a)
+Call defmod0504(unit, a)
+Case 25
+If power = 0 Then
+Call defmod0102(a)
+Else
+Call defmod01a2(a)
+End If
+Case 26
+a = 0
+Case 27
+Call defmod0120(a)
+End Select
+defcomodcal = a
+End Function
+'All units -10% defense
+Private Sub defmod01a1(ByRef def As Double)
+def = def - 10
+End Sub
+'All units -30% defense
+Private Sub defmod01a2(ByRef def As Double)
+def = def - 30
+End Sub
+'All units +10% defense
+Private Sub defmod0102(ByRef def As Double)
+def = def + 10
+End Sub
+'All units +20% defense
+Private Sub defmod0104(ByRef def As Double)
+def = def + 20
+End Sub
+'All units+30% defense
+Private Sub defmod0106(ByRef def As Double)
+def = def + 30
+End Sub
+'All units +60% defense
+Private Sub defmod0112(ByRef def As Double)
+def = def + 60
+End Sub
+'All units +100% defense
+Private Sub defmod0120(ByRef def As Double)
+def = def + 100
+End Sub
+'All footsoldiers +20% defense
+Private Sub defmod0204(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 0, 1, 2
+def = def + 20
+End Select
+End Sub
+'All footsoldiers +300% defense
+Private Sub defmod0260(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 0, 1, 2
+def = def + 300
+End Select
+End Sub
+'All veteran units +20% defense
+Private Sub defmod0304(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 3
+def = def + 20
+End Select
+End Sub
+'All naval & indirect units +10% defense
+Private Sub defmod0402(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 9, 10, 11, 12, 20, 21, 22, 23, 24, 25
+def = def + 10
+End Select
+End Sub
+'All air units +20% defense
+Private Sub defmod0504(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 14, 15, 16, 17, 18, 19
+def = def + 20
+End Select
+End Sub
+'All air units +30% defense
+Private Sub defmod0506(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 14, 15, 16, 17, 18, 19
+def = def + 30
+End Select
+End Sub
+'All air units +300% defense
+Private Sub defmod0560(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 14, 15, 16, 17, 18, 19
+def = def + 300
+End Select
+End Sub
+'All fighters/bombers +70% defense
+Private Sub defmod0614(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 14, 15
+def = def + 70
+End Select
+End Sub
+'All fighters/bombers +10000% defense
+Private Sub defmod06a1(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 14, 15
+def = def + 10000
+End Select
+End Sub
+'All mediumtanks/wartanks +70% defense
+Private Sub defmod0714(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 7, 8
+def = def + 70
+End Select
+End Sub
+'All mediumtanks/wartanks +90% defense
+Private Sub defmod0718(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 7, 8
+def = def + 90
+End Select
+End Sub
+'All land units +20% defense
+Private Sub defmod0804(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
+def = def + 20
+End Select
+End Sub
+'All copters,seaplane & naval units +40% defense
+Private Sub defmod0908(ByVal a As Double, ByRef def As Double)
+Select Case a
+Case 17, 18, 19, 20, 21, 22, 23, 24, 25
+def = def + 40
+End Select
+End Sub
