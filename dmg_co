@@ -1,0 +1,223 @@
+Private Function offcomodcal(ByRef offco1 As Double, ByRef offunit1 As Double, ByRef pow As Double, ByRef lev As Double) As Double
+'CO damage modifier calculator
+Dim a As Double
+a = 0
+Select Case offco1
+Case 0
+a = 0
+Case 1
+Call dmgmod0112(a)
+Case 2
+If pow = 0 Then
+Call dmgmod0102(a)
+Else
+Call dmgmod0108(a)
+End If
+Case 3
+Call dmgmod0104(a)
+Case 4
+If pow = 0 Then
+Call dmgmod0210(offunit1, a)
+Else
+Call dmgmod02a1(offunit1, a)
+End If
+Case 5
+If pow = 0 Then
+a = 0
+Else
+Call dmgmod0104(a)
+End If
+Case 6
+If pow = 0 Then
+a = 0
+Else
+Call dmgmod0310(offunit1, a)
+End If
+Case 7
+Call dmgmod0404(lev, a)
+Case 8
+Call dmgmod0112(a)
+Case 9
+Call dmgmod0102(a)
+Case 10
+Call dmgmod0106(a)
+Case 11
+Call dmgmod0102(a)
+Call dmgmod0504(offunit1, a)
+Case 12
+Call dmgmod0112(a)
+Case 13
+Call dmgmod0102(a)
+Call dmgmod0604(offunit1, a)
+Case 14
+Call dmgmod0102(a)
+Call dmgmod0704(offunit1, a)
+Case 15
+Call dmgmod0104(a)
+Case 16
+a = 0
+Case 17
+Call dmgmod0102(a)
+Call dmgmod0814(offunit1, a)
+Case 18
+If pow = 0 Then
+Call dmgmod0102(a)
+Else
+Call dmgmod0104(a)
+End If
+Case 19
+If pow = 0 Then
+Call dmgmod0102(a)
+Else
+Call dmgmod0106(a)
+End If
+Case 20
+If pow = 0 Then
+Call dmgmod0102(a)
+Call dmgmod0914(offunit1, a)
+Else
+Call dmgmod0102(a)
+Call dmgmod0918(offunit1, a)
+End If
+Case 21
+Call dmgmod0102(a)
+Call dmgmod1004(offunit1, a)
+Case 22
+Call dmgmod0104(a)
+Case 23
+Call dmgmod0102(a)
+Call dmgmod1102(offunit1, a)
+Case 24
+Call dmgmod0102(a)
+Call dmgmod0608(offunit1, a)
+Case 25
+If pow = 0 Then
+Call dmgmod0102(a)
+Else
+Call dmgmod0108(a)
+End If
+Case 26
+a = 0
+Case 27
+Call dmgmod0120(a)
+End Select
+offcomodcal = a
+End Function
+
+
+
+'All units +10% offense
+Private Sub dmgmod0102(ByRef dmg As Double)
+dmg = dmg + 10
+End Sub
+'All units +20% offense
+Private Sub dmgmod0104(ByRef dmg As Double)
+dmg = dmg + 20
+End Sub
+'All units +30% offense
+Private Sub dmgmod0106(ByRef dmg As Double)
+dmg = dmg + 30
+End Sub
+'All units+40% offense
+Private Sub dmgmod0108(ByRef dmg As Double)
+dmg = dmg + 40
+End Sub
+'All units +60% offense
+Private Sub dmgmod0112(ByRef dmg As Double)
+dmg = dmg + 60
+End Sub
+'All units +100% offense
+Private Sub dmgmod0120(ByRef dmg As Double)
+dmg = dmg + 100
+End Sub
+'All footsoldiers +50% offense
+Private Sub dmgmod0210(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 0, 1, 2
+dmg = dmg + 50
+End Select
+End Sub
+'All footsoldiers +1000% offense
+Private Sub dmgmod02a1(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 0, 1, 2
+dmg = dmg + 1000
+End Select
+End Sub
+'All Indirects +50% offense
+Private Sub dmgmod0310(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 9, 10, 11, 12, 20
+dmg = dmg + 50
+End Select
+End Sub
+'All veteran units +20% offense
+Private Sub dmgmod0404(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 3
+dmg = dmg + 20
+End Select
+End Sub
+'All naval & indirect units +20% offense
+Private Sub dmgmod0504(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 9, 10, 11, 12, 20, 21, 22, 23, 24, 25
+dmg = dmg + 20
+End Select
+End Sub
+'All air units +20% offense
+Private Sub dmgmod0604(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 14, 15, 16, 17, 18, 19
+dmg = dmg + 20
+End Select
+End Sub
+'All air units +40% offense
+Private Sub dmgmod0608(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 14, 15, 16, 17, 18, 19
+dmg = dmg + 40
+End Select
+End Sub
+'All land direct units +20% offense
+Private Sub dmgmod0704(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 0, 1, 2, 3, 4, 5, 6, 7, 8
+dmg = dmg + 20
+End Select
+End Sub
+'All bombers/fighters +70% offense
+Private Sub dmgmod0814(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 14, 15
+dmg = dmg + 70
+End Select
+End Sub
+'All mediumtanks/wartanks +70% offense
+Private Sub dmgmod0914(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 7, 8
+dmg = dmg + 70
+End Select
+End Sub
+'All mediumtanks/wartanks +90% offense
+Private Sub dmgmod0918(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 7, 8
+dmg = dmg + 90
+End Select
+End Sub
+'All land units +20% offense
+Private Sub dmgmod1004(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
+dmg = dmg + 20
+End Select
+End Sub
+'All copters,seaplane & naval units +10% offense
+Private Sub dmgmod1102(ByVal a As Double, ByRef dmg As Double)
+Select Case a
+Case 17, 18, 19, 20, 21, 22, 23, 24, 25
+dmg = dmg + 10
+End Select
+End Sub
