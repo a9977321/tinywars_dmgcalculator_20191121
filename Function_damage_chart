@@ -1,0 +1,1071 @@
+Private Function basedmgcal(ByRef offunit1 As Double, ByRef defunit1 As Double, ByRef c As Double) As Double
+'Base Damage Chart, c is used for cases with 2 weapons available
+Dim value As Double
+value = 100 * offunit1 + defunit1
+Select Case value
+Case 0
+basedmgcal = 55
+Case 1
+basedmgcal = 45
+Case 2
+basedmgcal = 45
+Case 3
+basedmgcal = 12
+Case 4
+basedmgcal = 10
+Case 5
+basedmgcal = 3
+Case 6
+basedmgcal = 5
+Case 7
+basedmgcal = 5
+Case 8
+basedmgcal = 1
+Case 9
+basedmgcal = 10
+Case 10
+basedmgcal = 30
+Case 11
+basedmgcal = 20
+Case 12
+basedmgcal = 20
+Case 13
+basedmgcal = 14
+Case 17
+basedmgcal = 8
+Case 18
+basedmgcal = 30
+Case 26
+basedmgcal = 1
+
+
+Case 100
+basedmgcal = 65
+Case 101
+basedmgcal = 55
+Case 102
+basedmgcal = 55
+Case 103
+If c = 0 Then
+basedmgcal = 85
+Else
+basedmgcal = 18
+End If
+Case 104
+If c = 0 Then
+basedmgcal = 80
+Else
+basedmgcal = 15
+End If
+Case 105
+If c = 0 Then
+basedmgcal = 55
+Else
+basedmgcal = 5
+End If
+Case 106
+If c = 0 Then
+basedmgcal = 55
+Else
+basedmgcal = 8
+End If
+Case 107
+If c = 0 Then
+basedmgcal = 25
+Else
+basedmgcal = 5
+End If
+Case 108
+If c = 0 Then
+basedmgcal = 15
+Else
+basedmgcal = 1
+End If
+Case 109
+If c = 0 Then
+basedmgcal = 70
+Else
+basedmgcal = 15
+End If
+Case 110
+If c = 0 Then
+basedmgcal = 55
+Else
+basedmgcal = 35
+End If
+Case 111
+If c = 0 Then
+basedmgcal = 85
+Else
+basedmgcal = 35
+End If
+Case 112
+If c = 0 Then
+basedmgcal = 85
+Else
+basedmgcal = 35
+End If
+Case 113
+If c = 0 Then
+basedmgcal = 75
+Else
+basedmgcal = 20
+End If
+Case 117
+basedmgcal = 12
+Case 118
+basedmgcal = 35
+Case 126
+If c = 0 Then
+basedmgcal = 15
+Else
+basedmgcal = 1
+End If
+
+
+Case 200
+basedmgcal = 65
+Case 201
+basedmgcal = 55
+Case 202
+basedmgcal = 55
+Case 203
+basedmgcal = 18
+Case 204
+basedmgcal = 15
+Case 205
+basedmgcal = 5
+Case 206
+basedmgcal = 8
+Case 207
+basedmgcal = 5
+Case 208
+basedmgcal = 1
+Case 209
+basedmgcal = 15
+Case 210
+basedmgcal = 35
+Case 211
+basedmgcal = 35
+Case 212
+basedmgcal = 35
+Case 213
+basedmgcal = 20
+Case 217
+basedmgcal = 12
+Case 218
+basedmgcal = 35
+Case 226
+basedmgcal = 1
+
+
+Case 300
+basedmgcal = 75
+Case 301
+basedmgcal = 65
+Case 302
+basedmgcal = 65
+Case 303
+basedmgcal = 35
+Case 304
+basedmgcal = 30
+Case 305
+basedmgcal = 8
+Case 306
+basedmgcal = 8
+Case 307
+basedmgcal = 5
+Case 308
+basedmgcal = 1
+Case 309
+basedmgcal = 45
+Case 310
+basedmgcal = 25
+Case 311
+basedmgcal = 55
+Case 312
+basedmgcal = 55
+Case 313
+basedmgcal = 45
+Case 317
+basedmgcal = 18
+Case 318
+basedmgcal = 35
+Case 326
+basedmgcal = 1
+
+
+Case 400
+basedmgcal = 80
+Case 401
+basedmgcal = 70
+Case 402
+basedmgcal = 70
+Case 403
+basedmgcal = 60
+Case 404
+basedmgcal = 50
+Case 405
+basedmgcal = 45
+Case 406
+basedmgcal = 10
+Case 407
+basedmgcal = 5
+Case 408
+basedmgcal = 1
+Case 409
+basedmgcal = 45
+Case 410
+basedmgcal = 25
+Case 411
+basedmgcal = 55
+Case 412
+basedmgcal = 55
+Case 413
+basedmgcal = 45
+Case 417
+basedmgcal = 18
+Case 418
+basedmgcal = 35
+Case 426
+basedmgcal = 5
+
+
+Case 500
+basedmgcal = 105
+Case 501
+basedmgcal = 105
+Case 502
+basedmgcal = 105
+Case 503
+basedmgcal = 60
+Case 504
+basedmgcal = 50
+Case 505
+basedmgcal = 45
+Case 506
+basedmgcal = 15
+Case 507
+basedmgcal = 10
+Case 508
+basedmgcal = 5
+Case 509
+basedmgcal = 50
+Case 510
+basedmgcal = 25
+Case 511
+basedmgcal = 55
+Case 512
+basedmgcal = 55
+Case 513
+basedmgcal = 50
+Case 514
+basedmgcal = 70
+Case 515
+basedmgcal = 70
+Case 516
+basedmgcal = 75
+Case 517
+basedmgcal = 105
+Case 518
+basedmgcal = 120
+Case 519
+basedmgcal = 75
+Case 526
+basedmgcal = 10
+
+
+Case 600
+basedmgcal = 75
+Case 601
+basedmgcal = 70
+Case 602
+basedmgcal = 70
+Case 603
+If c = 0 Then
+basedmgcal = 85
+Else
+basedmgcal = 40
+End If
+Case 604
+If c = 0 Then
+basedmgcal = 80
+Else
+basedmgcal = 35
+End If
+Case 605
+If c = 0 Then
+basedmgcal = 75
+Else
+basedmgcal = 8
+End If
+Case 606
+If c = 0 Then
+basedmgcal = 55
+Else
+basedmgcal = 8
+End If
+Case 607
+If c = 0 Then
+basedmgcal = 35
+Else
+basedmgcal = 5
+End If
+Case 608
+If c = 0 Then
+basedmgcal = 20
+Else
+basedmgcal = 1
+End If
+Case 609
+If c = 0 Then
+basedmgcal = 70
+Else
+basedmgcal = 45
+End If
+Case 610
+If c = 0 Then
+basedmgcal = 30
+Else
+basedmgcal = 1
+End If
+Case 611
+If c = 0 Then
+basedmgcal = 85
+Else
+basedmgcal = 55
+End If
+Case 612
+If c = 0 Then
+basedmgcal = 85
+Else
+basedmgcal = 55
+End If
+Case 613
+If c = 0 Then
+basedmgcal = 75
+Else
+basedmgcal = 45
+End If
+Case 617
+basedmgcal = 18
+Case 618
+basedmgcal = 35
+Case 620
+basedmgcal = 8
+Case 621
+basedmgcal = 8
+Case 622
+basedmgcal = 9
+Case 623
+basedmgcal = 9
+Case 624
+basedmgcal = 18
+Case 625
+basedmgcal = 55
+Case 626
+If c = 0 Then
+basedmgcal = 20
+Else
+basedmgcal = 1
+End If
+
+
+Case 700
+basedmgcal = 90
+Case 701
+basedmgcal = 80
+Case 702
+basedmgcal = 80
+Case 703
+If c = 0 Then
+basedmgcal = 95
+Else
+basedmgcal = 40
+End If
+Case 704
+If c = 0 Then
+basedmgcal = 90
+Else
+basedmgcal = 35
+End If
+Case 705
+If c = 0 Then
+basedmgcal = 90
+Else
+basedmgcal = 8
+End If
+Case 706
+If c = 0 Then
+basedmgcal = 70
+Else
+basedmgcal = 8
+End If
+Case 707
+If c = 0 Then
+basedmgcal = 55
+Else
+basedmgcal = 5
+End If
+Case 708
+If c = 0 Then
+basedmgcal = 35
+Else
+basedmgcal = 1
+End If
+Case 709
+If c = 0 Then
+basedmgcal = 85
+Else
+basedmgcal = 45
+End If
+Case 710
+If c = 0 Then
+basedmgcal = 35
+Else
+basedmgcal = 1
+End If
+Case 711
+If c = 0 Then
+basedmgcal = 90
+Else
+basedmgcal = 60
+End If
+Case 712
+If c = 0 Then
+basedmgcal = 90
+Else
+basedmgcal = 60
+End If
+Case 173
+If c = 0 Then
+basedmgcal = 90
+Else
+basedmgcal = 45
+End If
+Case 717
+basedmgcal = 24
+Case 718
+basedmgcal = 40
+Case 720
+basedmgcal = 10
+Case 721
+basedmgcal = 10
+Case 722
+basedmgcal = 12
+Case 723
+basedmgcal = 12
+Case 724
+basedmgcal = 22
+Case 725
+basedmgcal = 55
+Case 726
+If c = 0 Then
+basedmgcal = 35
+Else
+basedmgcal = 1
+End If
+
+
+
+Case 800
+basedmgcal = 105
+Case 801
+basedmgcal = 95
+Case 802
+basedmgcal = 95
+Case 803
+If c = 0 Then
+basedmgcal = 105
+Else
+basedmgcal = 45
+End If
+Case 804
+If c = 0 Then
+basedmgcal = 105
+Else
+basedmgcal = 40
+End If
+Case 805
+If c = 0 Then
+basedmgcal = 105
+Else
+basedmgcal = 10
+End If
+Case 806
+If c = 0 Then
+basedmgcal = 85
+Else
+basedmgcal = 10
+End If
+Case 807
+If c = 0 Then
+basedmgcal = 75
+Else
+basedmgcal = 10
+End If
+Case 808
+If c = 0 Then
+basedmgcal = 55
+Else
+basedmgcal = 1
+End If
+Case 809
+If c = 0 Then
+basedmgcal = 105
+Else
+basedmgcal = 45
+End If
+Case 810
+If c = 0 Then
+basedmgcal = 40
+Else
+basedmgcal = 1
+End If
+Case 811
+If c = 0 Then
+basedmgcal = 105
+Else
+basedmgcal = 65
+End If
+Case 812
+If c = 0 Then
+basedmgcal = 105
+Else
+basedmgcal = 65
+End If
+Case 813
+If c = 0 Then
+basedmgcal = 105
+Else
+basedmgcal = 45
+End If
+Case 817
+basedmgcal = 35
+Case 818
+basedmgcal = 45
+Case 820
+basedmgcal = 12
+Case 821
+basedmgcal = 12
+Case 822
+basedmgcal = 14
+Case 823
+basedmgcal = 14
+Case 824
+basedmgcal = 28
+Case 825
+basedmgcal = 65
+Case 826
+If c = 0 Then
+basedmgcal = 55
+Else
+basedmgcal = 1
+End If
+
+
+Case 900
+basedmgcal = 90
+Case 901
+basedmgcal = 85
+Case 902
+basedmgcal = 85
+Case 903
+basedmgcal = 80
+Case 904
+basedmgcal = 75
+Case 905
+basedmgcal = 65
+Case 906
+basedmgcal = 60
+Case 907
+basedmgcal = 45
+Case 908
+basedmgcal = 35
+Case 909
+basedmgcal = 75
+Case 910
+basedmgcal = 55
+Case 911
+basedmgcal = 80
+Case 912
+basedmgcal = 80
+Case 913
+basedmgcal = 70
+Case 920
+basedmgcal = 45
+Case 921
+basedmgcal = 45
+Case 922
+basedmgcal = 55
+Case 923
+basedmgcal = 55
+Case 924
+basedmgcal = 65
+Case 925
+basedmgcal = 100
+Case 926
+basedmgcal = 45
+
+
+Case 1000
+basedmgcal = 75
+Case 1001
+basedmgcal = 65
+Case 1002
+basedmgcal = 65
+Case 1003
+basedmgcal = 75
+Case 1004
+basedmgcal = 75
+Case 1005
+basedmgcal = 75
+Case 1006
+basedmgcal = 75
+Case 1007
+basedmgcal = 65
+Case 1008
+basedmgcal = 55
+Case 1009
+basedmgcal = 65
+Case 1010
+basedmgcal = 55
+Case 1011
+basedmgcal = 70
+Case 1012
+basedmgcal = 70
+Case 1013
+basedmgcal = 65
+Case 1017
+basedmgcal = 45
+Case 1018
+basedmgcal = 55
+Case 1026
+basedmgcal = 55
+
+
+Case 1100
+basedmgcal = 95
+Case 1101
+basedmgcal = 90
+Case 1102
+basedmgcal = 90
+Case 1103
+basedmgcal = 90
+Case 1104
+basedmgcal = 85
+Case 1105
+basedmgcal = 75
+Case 1106
+basedmgcal = 70
+Case 1107
+basedmgcal = 55
+Case 1108
+basedmgcal = 45
+Case 1109
+basedmgcal = 80
+Case 1110
+basedmgcal = 65
+Case 1111
+basedmgcal = 85
+Case 1112
+basedmgcal = 85
+Case 1113
+basedmgcal = 80
+Case 1120
+basedmgcal = 55
+Case 1121
+basedmgcal = 55
+Case 1122
+basedmgcal = 65
+Case 1123
+basedmgcal = 65
+Case 1124
+basedmgcal = 75
+Case 1125
+basedmgcal = 105
+Case 1125
+basedmgcal = 55
+
+
+Case 1214
+basedmgcal = 100
+Case 1215
+basedmgcal = 100
+Case 1216
+basedmgcal = 100
+Case 1217
+basedmgcal = 120
+Case 1218
+basedmgcal = 120
+Case 1219
+basedmgcal = 100
+
+
+Case 1414
+basedmgcal = 55
+Case 1415
+basedmgcal = 65
+Case 1416
+basedmgcal = 80
+Case 1417
+basedmgcal = 120
+Case 1418
+basedmgcal = 120
+Case 1419
+basedmgcal = 65
+
+
+Case 1500
+basedmgcal = 115
+Case 1501
+basedmgcal = 110
+Case 1502
+basedmgcal = 110
+Case 1503
+basedmgcal = 105
+Case 1504
+basedmgcal = 105
+Case 1505
+basedmgcal = 85
+Case 1506
+basedmgcal = 105
+Case 1507
+basedmgcal = 95
+Case 1508
+basedmgcal = 75
+Case 1509
+basedmgcal = 105
+Case 1510
+basedmgcal = 80
+Case 1511
+basedmgcal = 105
+Case 1512
+basedmgcal = 95
+Case 1513
+basedmgcal = 105
+Case 1520
+basedmgcal = 85
+Case 1521
+basedmgcal = 85
+Case 1522
+basedmgcal = 95
+Case 1523
+basedmgcal = 50
+Case 1524
+basedmgcal = 95
+Case 1525
+basedmgcal = 120
+Case 1526
+basedmgcal = 90
+
+
+Case 1600
+basedmgcal = 55
+Case 1601
+basedmgcal = 45
+Case 1602
+basedmgcal = 45
+Case 1603
+basedmgcal = 18
+Case 1604
+basedmgcal = 15
+Case 1605
+basedmgcal = 5
+Case 1606
+basedmgcal = 8
+Case 1607
+basedmgcal = 5
+Case 1608
+basedmgcal = 1
+Case 1609
+basedmgcal = 15
+Case 1610
+basedmgcal = 5
+Case 1611
+basedmgcal = 20
+Case 1612
+basedmgcal = 20
+Case 1613
+basedmgcal = 15
+Case 1614
+basedmgcal = 40
+Case 1615
+basedmgcal = 45
+Case 1616
+basedmgcal = 55
+Case 1617
+basedmgcal = 75
+Case 1618
+basedmgcal = 90
+Case 1619
+basedmgcal = 45
+Case 1626
+basedmgcal = 1
+
+
+Case 1700
+basedmgcal = 75
+Case 1701
+basedmgcal = 60
+Case 1702
+basedmgcal = 60
+Case 1703
+If c = 0 Then
+basedmgcal = 75
+Else
+basedmgcal = 30
+End If
+Case 1704
+If c = 0 Then
+basedmgcal = 75
+Else
+basedmgcal = 30
+End If
+Case 1705
+If c = 0 Then
+basedmgcal = 10
+Else
+basedmgcal = 1
+End If
+Case 1706
+If c = 0 Then
+basedmgcal = 70
+Else
+basedmgcal = 8
+End If
+Case 1707
+If c = 0 Then
+basedmgcal = 45
+Else
+basedmgcal = 8
+End If
+Case 1708
+If c = 0 Then
+basedmgcal = 35
+Else
+basedmgcal = 1
+End If
+Case 1709
+If c = 0 Then
+basedmgcal = 65
+Else
+basedmgcal = 25
+End If
+Case 1710
+If c = 0 Then
+basedmgcal = 20
+Else
+basedmgcal = 1
+End If
+Case 1711
+If c = 0 Then
+basedmgcal = 75
+Else
+basedmgcal = 35
+End If
+Case 1712
+If c = 0 Then
+basedmgcal = 55
+Else
+basedmgcal = 25
+End If
+Case 1713
+If c = 0 Then
+basedmgcal = 70
+Else
+basedmgcal = 20
+End If
+Case 1717
+basedmgcal = 65
+Case 1718
+basedmgcal = 85
+Case 1720
+basedmgcal = 25
+Case 1721
+basedmgcal = 25
+Case 1722
+basedmgcal = 25
+Case 1723
+basedmgcal = 5
+Case 1724
+basedmgcal = 25
+Case 1725
+basedmgcal = 85
+Case 1726
+basedmgcal = 20
+
+
+Case 1900
+basedmgcal = 90
+Case 1901
+basedmgcal = 85
+Case 1902
+basedmgcal = 85
+Case 1903
+basedmgcal = 80
+Case 1904
+basedmgcal = 80
+Case 1905
+basedmgcal = 45
+Case 1906
+basedmgcal = 75
+Case 1907
+basedmgcal = 65
+Case 1908
+basedmgcal = 55
+Case 1909
+basedmgcal = 70
+Case 1910
+basedmgcal = 50
+Case 1911
+basedmgcal = 80
+Case 1912
+basedmgcal = 70
+Case 1913
+basedmgcal = 75
+Case 1914
+basedmgcal = 45
+Case 1915
+basedmgcal = 55
+Case 1916
+basedmgcal = 65
+Case 1917
+basedmgcal = 85
+Case 1918
+basedmgcal = 95
+Case 1919
+basedmgcal = 55
+Case 1920
+basedmgcal = 45
+Case 1921
+basedmgcal = 65
+Case 1922
+basedmgcal = 55
+Case 1923
+basedmgcal = 40
+Case 1924
+basedmgcal = 85
+Case 1925
+basedmgcal = 105
+Case 1926
+basedmgcal = 55
+
+
+Case 2000
+basedmgcal = 75
+Case 2001
+basedmgcal = 70
+Case 2002
+basedmgcal = 70
+Case 2003
+basedmgcal = 70
+Case 2004
+basedmgcal = 70
+Case 2005
+basedmgcal = 65
+Case 2006
+basedmgcal = 65
+Case 2007
+basedmgcal = 50
+Case 2008
+basedmgcal = 40
+Case 2009
+basedmgcal = 70
+Case 2010
+basedmgcal = 55
+Case 2011
+basedmgcal = 75
+Case 2012
+basedmgcal = 75
+Case 2013
+basedmgcal = 65
+Case 2020
+basedmgcal = 45
+Case 2021
+basedmgcal = 50
+Case 2022
+basedmgcal = 65
+Case 2023
+basedmgcal = 65
+Case 2024
+basedmgcal = 75
+Case 2025
+basedmgcal = 95
+Case 2026
+basedmgcal = 55
+
+
+Case 2114
+basedmgcal = 35
+Case 2115
+basedmgcal = 35
+Case 2116
+basedmgcal = 40
+Case 2117
+basedmgcal = 45
+Case 2118
+basedmgcal = 55
+Case 2119
+basedmgcal = 40
+
+
+Case 2220
+basedmgcal = 80
+Case 2221
+basedmgcal = 110
+Case 2222
+basedmgcal = 55
+Case 2223
+basedmgcal = 20
+Case 2224
+basedmgcal = 85
+Case 2225
+basedmgcal = 120
+
+
+Case 2314
+basedmgcal = 105
+Case 2315
+basedmgcal = 105
+Case 2316
+basedmgcal = 105
+Case 2317
+basedmgcal = 120
+Case 2318
+basedmgcal = 120
+Case 2319
+basedmgcal = 105
+Case 2320
+basedmgcal = 38
+Case 2321
+basedmgcal = 38
+Case 2322
+basedmgcal = 95
+Case 2323
+basedmgcal = 28
+Case 2324
+basedmgcal = 40
+Case 2325
+basedmgcal = 85
+
+
+Case 2520
+basedmgcal = 40
+Case 2521
+basedmgcal = 40
+Case 2522
+basedmgcal = 40
+Case 2523
+basedmgcal = 40
+Case 2524
+basedmgcal = 55
+Case 2525
+basedmgcal = 75
+
+
+Case Else
+basedmgcal = -1
+
+End Select
+End Function
