@@ -35,13 +35,13 @@
 
         'Data calculation
         basedmg1 = basedmgcal(offunit1, defunit1, subweapon01)
-        offcomod1 = offcomod1 + offcomodcal(offco1, offunit1, offpow1, lev1)
+        offcomod1 = offcomod1 + offcomodcal(offco1, offunit1, offpow1)
         offlevmod1 = levdmgmod(lev1)
         deflevmod1 = levdefmod(lev2)
         defter1 = tercal(defter1)
         offter1 = tercal(offter1)
 
-        'Air units do not enjoy terrain defense
+        'Air units and meteors do not enjoy terrain defense
         Select Case offunit1
             Case 14, 15, 16, 17, 18, 19
                 offter1 = 0
@@ -51,7 +51,7 @@
                 defter1 = 0
         End Select
 
-        defcomod1 = defcomod1 + defcomodcal(defco1, defunit1, defpow1, lev2)
+        defcomod1 = defcomod1 + defcomodcal(defco1, defunit1, defpow1)
         offresult1 = Fix((basedmg1 * (offcomod1 + offlevmod1 + 5 * tow1) + luc1 * 100) * ((HP1 + 9) \ 10) / (defcomod1 + defter1 * ((HP2 + 9) \ 10) / 10 + 5 * tow2 + deflevmod1) / 10)
         HP2 = HP2 - offresult1
 
@@ -59,10 +59,12 @@
         If HP2 > 0 Then
             cflag = True
         End If
+        'Indirects cannot be counterattacked
         Select Case offunit1
             Case 9, 11, 12, 20
                 cflag = False
         End Select
+        'Indirects cannot counterattack
         Select Case defunit1
             Case 9, 11, 12, 20
                 cflag = False
@@ -70,10 +72,10 @@
 
         If cflag Then
             basedmg2 = basedmgcal(defunit1, offunit1, subweapon02)
-            offcomod2 = offcomod2 + offcomodcal(defco1, defunit1, defpow1, lev2)
+            offcomod2 = offcomod2 + offcomodcal(defco1, defunit1, defpow1)
             offlevmod2 = levdmgmod(lev2)
             deflevmod2 = levdmgmod(lev1)
-            defcomod2 = defcomod2 + defcomodcal(offco1, offunit1, offpow1, lev1)
+            defcomod2 = defcomod2 + defcomodcal(offco1, offunit1, offpow1)
             defresult1 = Fix((basedmg2 * (offcomod2 + offlevmod2 + 5 * tow2) + luc2 * 100) * ((HP2 + 9) \ 10) / (defcomod2 + offter1 * ((HP1 + 9) \ 10) / 10 + 5 * tow1 + deflevmod2) / 10)
         Else
             defresult1 = 0
@@ -94,6 +96,8 @@
                 levdmgmod = 10
             Case 3
                 levdmgmod = 20
+            Case Else
+                levdmgmod = 0
         End Select
     End Function
     Private Function levdefmod(ByVal lev As Double) As Double
@@ -104,223 +108,149 @@
         End If
     End Function
 
-    Private Function offcomodcal(ByRef offco1 As Double, ByRef offunit1 As Double, ByRef pow As Double, ByRef lev As Double) As Double
+    Private Function offcomodcal(ByRef co As Double, ByRef unit As Double, ByRef pow As Double) As Double
         'CO damage modifier calculator
         Dim a As Double
         a = 0
-        Select Case offco1
+        Select Case co
             Case 0
+                'No CO T2
                 a = 0
             Case 1
-                Call dmgmod0112(a)
+                'Brenner T2
+                Call dmgmod0102(a)
             Case 2
-                If pow = 0 Then
-                    Call dmgmod0102(a)
-                Else
-                    Call dmgmod0108(a)
-                End If
+                'Caulder T2
+                Call dmgmod0105(a)
             Case 3
+                'Forsythe T2
                 Call dmgmod0104(a)
             Case 4
-                If pow = 0 Then
-                    Call dmgmod0210(offunit1, a)
-                Else
-                    Call dmgmod02a1(offunit1, a)
-                End If
+                'Gage T2
+                Call dmgmod0102(a)
+                Call dmgmod0504(unit, a)
             Case 5
+                'Grat T2
                 If pow = 0 Then
-                    a = 0
+                    Call dmgmod0102(a)
                 Else
                     Call dmgmod0104(a)
                 End If
             Case 6
-                If pow = 0 Then
-                    a = 0
-                Else
-                    Call dmgmod0310(offunit1, a)
-                End If
+                'Greyfield T2
+                Call dmgmod0102(a)
+                Call dmgmod1102(unit, a)
             Case 7
-                Call dmgmod0404(lev, a)
-            Case 8
-                Call dmgmod0112(a)
-            Case 9
-                Call dmgmod0102(a)
-            Case 10
-                Call dmgmod0106(a)
-            Case 11
-                Call dmgmod0102(a)
-                Call dmgmod0504(offunit1, a)
-            Case 12
-                Call dmgmod0112(a)
-            Case 13
-                Call dmgmod0102(a)
-                Call dmgmod0604(offunit1, a)
-            Case 14
-                Call dmgmod0102(a)
-                Call dmgmod0704(offunit1, a)
-            Case 15
+                'Hawk T2
                 Call dmgmod0104(a)
-            Case 16
-                a = 0
-            Case 17
-                Call dmgmod0102(a)
-                Call dmgmod0814(offunit1, a)
-            Case 18
+            Case 8
+                'Isabella T2
+                Call dmgmod0104(a)
+            Case 9
+                'Lee T2
                 If pow = 0 Then
                     Call dmgmod0102(a)
                 Else
                     Call dmgmod0104(a)
                 End If
-            Case 19
-                If pow = 0 Then
-                    Call dmgmod0102(a)
-                Else
-                    Call dmgmod0106(a)
-                End If
-            Case 20
-                If pow = 0 Then
-                    Call dmgmod0102(a)
-                    Call dmgmod0914(offunit1, a)
-                Else
-                    Call dmgmod0102(a)
-                    Call dmgmod0918(offunit1, a)
-                End If
-            Case 21
+            Case 10
+                'Lin T2
                 Call dmgmod0102(a)
-                Call dmgmod1004(offunit1, a)
-            Case 22
-                Call dmgmod0104(a)
-            Case 23
+                Call dmgmod1004(unit, a)
+            Case 11
+                'Mira T2
+                a = 0
+            Case 12
+                'Tabitha T2
+                Call dmgmod0112(a)
+            Case 13
+                'Tasha T2
                 Call dmgmod0102(a)
-                Call dmgmod1102(offunit1, a)
-            Case 24
-                Call dmgmod0102(a)
-                Call dmgmod0608(offunit1, a)
-            Case 25
+                Call dmgmod0608(unit, a)
+            Case 14
+                'Tinker T2
                 If pow = 0 Then
                     Call dmgmod0102(a)
                 Else
                     Call dmgmod0108(a)
                 End If
-            Case 26
-                a = 0
-            Case 27
-                Call dmgmod0120(a)
+            Case 15
+                'Waylon T2
+                Call dmgmod0102(a)
+                Call dmgmod0604(unit, a)
+            Case 16
+                'Will T2
+                Call dmgmod0102(a)
+                Call dmgmod0704(unit, a)
+            Case 17
+                'zhaotiantong T2
+                Call dmgmod0102(a)
         End Select
         offcomodcal = a
     End Function
 
 
 
-    'All units +10% offense
+    'All units +10% offense    Common
     Private Sub dmgmod0102(ByRef dmg As Double)
         dmg = dmg + 10
     End Sub
-    'All units +20% offense
+    'All units +20% offense    Forsythe T2, Grat T2, Hawk T2, Isabella T2, Lee T2
     Private Sub dmgmod0104(ByRef dmg As Double)
         dmg = dmg + 20
     End Sub
-    'All units +30% offense
-    Private Sub dmgmod0106(ByRef dmg As Double)
-        dmg = dmg + 30
+    'All units +25% offense    Caulder T2
+    Private Sub dmgmod0105(ByRef dmg As Double)
+        dmg = dmg + 25
     End Sub
-    'All units+40% offense
+
+    'All units +40% offense    Tinker T2
     Private Sub dmgmod0108(ByRef dmg As Double)
         dmg = dmg + 40
     End Sub
-    'All units +60% offense
+
+    'All units +60% offense    Tabitha T2
     Private Sub dmgmod0112(ByRef dmg As Double)
         dmg = dmg + 60
     End Sub
-    'All units +100% offense
-    Private Sub dmgmod0120(ByRef dmg As Double)
-        dmg = dmg + 100
-    End Sub
-    'All footsoldiers +50% offense
-    Private Sub dmgmod0210(ByVal a As Double, ByRef dmg As Double)
-        Select Case a
-            Case 0, 1, 2
-                dmg = dmg + 50
-        End Select
-    End Sub
-    'All footsoldiers +1000% offense
-    Private Sub dmgmod02a1(ByVal a As Double, ByRef dmg As Double)
-        Select Case a
-            Case 0, 1, 2
-                dmg = dmg + 1000
-        End Select
-    End Sub
-    'All Indirects +50% offense
-    Private Sub dmgmod0310(ByVal a As Double, ByRef dmg As Double)
-        Select Case a
-            Case 9, 10, 11, 12, 20
-                dmg = dmg + 50
-        End Select
-    End Sub
-    'All veteran units +20% offense
-    Private Sub dmgmod0404(ByVal a As Double, ByRef dmg As Double)
-        Select Case a
-            Case 3
-                dmg = dmg + 20
-        End Select
-    End Sub
-    'All naval & indirect units +20% offense
+
+    'All naval & indirect units +20% offense    Gage T2
     Private Sub dmgmod0504(ByVal a As Double, ByRef dmg As Double)
         Select Case a
             Case 9, 10, 11, 12, 20, 21, 22, 23, 24, 25
                 dmg = dmg + 20
         End Select
     End Sub
-    'All air units +20% offense
+    'All air units +20% offense    Waylon T2
     Private Sub dmgmod0604(ByVal a As Double, ByRef dmg As Double)
         Select Case a
             Case 14, 15, 16, 17, 18, 19
                 dmg = dmg + 20
         End Select
     End Sub
-    'All air units +40% offense
+    'All air units +40% offense    Tasha T2
     Private Sub dmgmod0608(ByVal a As Double, ByRef dmg As Double)
         Select Case a
             Case 14, 15, 16, 17, 18, 19
                 dmg = dmg + 40
         End Select
     End Sub
-    'All land direct units +20% offense
+    'All land direct units +20% offense    Will T2
     Private Sub dmgmod0704(ByVal a As Double, ByRef dmg As Double)
         Select Case a
             Case 0, 1, 2, 3, 4, 5, 6, 7, 8
                 dmg = dmg + 20
         End Select
     End Sub
-    'All bombers/fighters +70% offense
-    Private Sub dmgmod0814(ByVal a As Double, ByRef dmg As Double)
-        Select Case a
-            Case 14, 15
-                dmg = dmg + 70
-        End Select
-    End Sub
-    'All mediumtanks/wartanks +70% offense
-    Private Sub dmgmod0914(ByVal a As Double, ByRef dmg As Double)
-        Select Case a
-            Case 7, 8
-                dmg = dmg + 70
-        End Select
-    End Sub
-    'All mediumtanks/wartanks +90% offense
-    Private Sub dmgmod0918(ByVal a As Double, ByRef dmg As Double)
-        Select Case a
-            Case 7, 8
-                dmg = dmg + 90
-        End Select
-    End Sub
-    'All land units +20% offense
+
+    'All land units +20% offense    Lin T2
     Private Sub dmgmod1004(ByVal a As Double, ByRef dmg As Double)
         Select Case a
             Case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
                 dmg = dmg + 20
         End Select
     End Sub
-    'All copters,seaplane & naval units +10% offense
+    'All copters,seaplane & naval units +10% offense    Greyfield T2
     Private Sub dmgmod1102(ByVal a As Double, ByRef dmg As Double)
         Select Case a
             Case 17, 18, 19, 20, 21, 22, 23, 24, 25
@@ -328,229 +258,146 @@
         End Select
     End Sub
 
-    Private Function defcomodcal(ByVal co As Double, ByVal unit As Double, ByVal power As Double, ByVal lev As Double) As Double
+    Private Function defcomodcal(ByVal co As Double, ByVal unit As Double, ByVal pow As Double) As Double
         'CO defense modifier calculator
         Dim a As Double
         a = 0
         Select Case co
             Case 0
+                'No CO
                 a = 0
             Case 1
-                Call defmod0112(a)
+                'Brenner T2
+                Call defmod0106(a)
             Case 2
-                If power = 0 Then
+                'Caulder T2
+                Call defmod0105(a)
+            Case 3
+                'Forsythe T2
+                Call defmod0104(a)
+            Case 4
+                'Gage T2
+                Call defmod0102(a)
+                Call defmod0402(unit, a)
+            Case 5
+                'Grat T2
+                If pow = 0 Then
                     Call defmod0102(a)
                 Else
                     Call defmod0104(a)
                 End If
-            Case 3
-                Call defmod0104(a)
-            Case 4
-                If power = 0 Then
-                    Call defmod0204(unit, a)
-                Else
-                    Call defmod0260(unit, a)
-                End If
-            Case 5
-                If power = 0 Then
-                    a = 0
-                Else
-                    Call defmod0104(a)
-                End If
             Case 6
-                If power = 0 Then
-                    a = 0
-                Else
-                    Call defmod0106(a)
-                End If
-            Case 7
-                Call defmod0304(lev, a)
-            Case 8
-                Call defmod0112(a)
-            Case 9
-                Call defmod0106(a)
-            Case 10
-                Call defmod0106(a)
-            Case 11
+                'Greyfield T2
                 Call defmod0102(a)
-                Call defmod0402(unit, a)
+                Call defmod0908(unit, a)
+            Case 7
+                'Hawk T2
+                Call defmod0102(a)
+            Case 8
+                'Isabella T2
+                Call defmod0104(a)
+            Case 9
+                'Lee T2
+                Call defmod0102(a)
+            Case 10
+                'Lin T2
+                Call defmod0102(a)
+                Call defmod0804(unit, a)
+            Case 11
+                'Mira T2
+                a = 0
             Case 12
+                'Tabitha T2
                 Call defmod0112(a)
             Case 13
-                If power = 0 Then
+                'Tasha T2
+                Call defmod0102(a)
+                Call defmod0504(unit, a)
+            Case 14
+                'Tinker T2
+                If pow = 0 Then
+                    Call defmod0102(a)
+                Else
+                    Call defmod01a1(a)
+                End If
+            Case 15
+                'Waylon T2
+                If pow = 0 Then
                     Call defmod0102(a)
                     Call defmod0506(unit, a)
                 Else
                     Call defmod0102(a)
                     Call defmod0560(unit, a)
                 End If
-            Case 14
-                Call defmod0102(a)
-            Case 15
-                Call defmod0102(a)
             Case 16
-                a = 0
+                'Will T2
+                Call defmod0102(a)
             Case 17
-                If power = 0 Then
-                    Call defmod0102(a)
-                    Call defmod0614(unit, a)
-                Else
-                    Call defmod0102(a)
-                    Call defmod06a1(unit, a)
-                End If
-            Case 18
+                'zhaotiantong T2
                 Call defmod0102(a)
-            Case 19
-                If power = 0 Then
-                    Call defmod0102(a)
-                Else
-                    Call defmod01a1(a)
-                End If
-            Case 20
-                If power = 0 Then
-                    Call defmod0102(a)
-                    Call defmod0714(unit, a)
-                Else
-                    Call defmod0102(a)
-                    Call defmod0718(unit, a)
-                End If
-            Case 21
-                Call defmod0102(a)
-                Call defmod0804(unit, a)
-            Case 22
-                Call defmod0104(a)
-            Case 23
-                Call defmod0102(a)
-                Call defmod0908(unit, a)
-            Case 24
-                Call defmod0102(a)
-                Call defmod0504(unit, a)
-            Case 25
-                If power = 0 Then
-                    Call defmod0102(a)
-                Else
-                    Call defmod01a2(a)
-                End If
-            Case 26
-                a = 0
-            Case 27
-                Call defmod0120(a)
         End Select
         defcomodcal = a
     End Function
-    'All units -10% defense
+    'All units -10% defense    Tinker T2
     Private Sub defmod01a1(ByRef def As Double)
         def = def - 10
     End Sub
-    'All units -30% defense
-    Private Sub defmod01a2(ByRef def As Double)
-        def = def - 30
-    End Sub
-    'All units +10% defense
+    'All units +10% defense    Common
     Private Sub defmod0102(ByRef def As Double)
         def = def + 10
     End Sub
-    'All units +20% defense
+    'All units +20% defense    Forsythe T2, Grat T2, Isabella T2
     Private Sub defmod0104(ByRef def As Double)
         def = def + 20
     End Sub
-    'All units+30% defense
+    'All units +25% defense    Caulder T2
+    Private Sub defmod0105(ByRef def As Double)
+        def = def + 25
+    End Sub
+    'All units +30% defense    Brenner T2
     Private Sub defmod0106(ByRef def As Double)
         def = def + 30
     End Sub
-    'All units +60% defense
+    'All units +60% defense    Tabitha T2
     Private Sub defmod0112(ByRef def As Double)
         def = def + 60
     End Sub
-    'All units +100% defense
-    Private Sub defmod0120(ByRef def As Double)
-        def = def + 100
-    End Sub
-    'All footsoldiers +20% defense
-    Private Sub defmod0204(ByVal a As Double, ByRef def As Double)
-        Select Case a
-            Case 0, 1, 2
-                def = def + 20
-        End Select
-    End Sub
-    'All footsoldiers +300% defense
-    Private Sub defmod0260(ByVal a As Double, ByRef def As Double)
-        Select Case a
-            Case 0, 1, 2
-                def = def + 300
-        End Select
-    End Sub
-    'All veteran units +20% defense
-    Private Sub defmod0304(ByVal a As Double, ByRef def As Double)
-        Select Case a
-            Case 3
-                def = def + 20
-        End Select
-    End Sub
-    'All naval & indirect units +10% defense
+    'All naval & indirect units +10% defense    Gage T2
     Private Sub defmod0402(ByVal a As Double, ByRef def As Double)
         Select Case a
             Case 9, 10, 11, 12, 20, 21, 22, 23, 24, 25
                 def = def + 10
         End Select
     End Sub
-    'All air units +20% defense
+    'All air units +20% defense    Tasha T2
     Private Sub defmod0504(ByVal a As Double, ByRef def As Double)
         Select Case a
             Case 14, 15, 16, 17, 18, 19
                 def = def + 20
         End Select
     End Sub
-    'All air units +30% defense
+    'All air units +30% defense    Waylon T2
     Private Sub defmod0506(ByVal a As Double, ByRef def As Double)
         Select Case a
             Case 14, 15, 16, 17, 18, 19
                 def = def + 30
         End Select
     End Sub
-    'All air units +300% defense
+    'All air units +300% defense    Waylon T2
     Private Sub defmod0560(ByVal a As Double, ByRef def As Double)
         Select Case a
             Case 14, 15, 16, 17, 18, 19
                 def = def + 300
         End Select
     End Sub
-    'All fighters/bombers +70% defense
-    Private Sub defmod0614(ByVal a As Double, ByRef def As Double)
-        Select Case a
-            Case 14, 15
-                def = def + 70
-        End Select
-    End Sub
-    'All fighters/bombers +10000% defense
-    Private Sub defmod06a1(ByVal a As Double, ByRef def As Double)
-        Select Case a
-            Case 14, 15
-                def = def + 10000
-        End Select
-    End Sub
-    'All mediumtanks/wartanks +70% defense
-    Private Sub defmod0714(ByVal a As Double, ByRef def As Double)
-        Select Case a
-            Case 7, 8
-                def = def + 70
-        End Select
-    End Sub
-    'All mediumtanks/wartanks +90% defense
-    Private Sub defmod0718(ByVal a As Double, ByRef def As Double)
-        Select Case a
-            Case 7, 8
-                def = def + 90
-        End Select
-    End Sub
-    'All land units +20% defense
+    'All land units +20% defense    Lin T2
     Private Sub defmod0804(ByVal a As Double, ByRef def As Double)
         Select Case a
             Case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
                 def = def + 20
         End Select
     End Sub
-    'All copters,seaplane & naval units +40% defense
+    'All copters,seaplane & naval units +40% defense    Greyfield T2
     Private Sub defmod0908(ByVal a As Double, ByRef def As Double)
         Select Case a
             Case 17, 18, 19, 20, 21, 22, 23, 24, 25
