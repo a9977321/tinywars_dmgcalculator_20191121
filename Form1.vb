@@ -843,7 +843,7 @@
                 Else
                     basedmgcal = 60
                 End If
-            Case 173
+            Case 713
                 If c = 0 Then
                     basedmgcal = 90
                 Else
@@ -1090,7 +1090,7 @@
                 basedmgcal = 75
             Case 1125
                 basedmgcal = 105
-            Case 1125
+            Case 1126
                 basedmgcal = 55
 
 
@@ -1299,8 +1299,11 @@
             Case 1725
                 basedmgcal = 85
             Case 1726
-                basedmgcal = 20
-
+                If c = 0 then
+                    basedmgcal = 20
+                Else
+                    basedmgcal = 1
+                End If
 
             Case 1900
                 basedmgcal = 90
